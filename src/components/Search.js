@@ -1,35 +1,28 @@
 import React from "react";
 import { useState } from "react";
-import { searchUsers, loading } from "../redux/actions";
+import { searchUsers, setLoading, getUsers } from "../redux/actions";
 import { useDispatch } from "react-redux";
-import axios from "axios";
-import Alert from "./Alert";
+
+import { Alert, Button } from "react-bootstrap";
+import Users from "./Users";
 
 const Search = () => {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
   const [alert, setAlert] = useState(false);
 
-  const users = async (text) => {
-    dispatch(loading(true));
-    const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}`
-    );
-    dispatch(searchUsers(res.data.items));
-    dispatch(loading(false));
-  };
-
   const onSubmit = (e) => {
-    users(searchText);
-    setSearchText("");
-    e.preventDefault();
     if (searchText.length === 0) {
       setAlert(true);
       setTimeout(() => {
         setAlert(false);
       }, 5000);
-      dispatch(loading(false));
+      dispatch(setLoading(false));
+    } else {
+      dispatch(getUsers(searchText));
+      setSearchText("");
     }
+    e.preventDefault();
   };
 
   const handleChange = (e) => {
@@ -39,7 +32,9 @@ const Search = () => {
 
   return (
     <div>
-      {alert && <Alert />}
+      {alert && (
+        <Alert variant="warning">⚠ Please enter something to search.</Alert>
+      )}
       <form className="form" onSubmit={onSubmit}>
         <input
           className="input"
@@ -48,8 +43,19 @@ const Search = () => {
           onChange={handleChange}
           value={searchText}
         />
-        <input type="submit" className="btn" value="Search" />
+        <Button variant="dark" className="form-btn" type="submit">
+          Search
+        </Button>
+        <Button
+          variant="secondary"
+          className="form-btn"
+          onClick={() => {
+            dispatch(searchUsers([]));
+          }}>
+          Clear
+        </Button>
       </form>
+      <Users />
     </div>
   );
 };

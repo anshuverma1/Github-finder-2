@@ -16,10 +16,9 @@
   padding: 4px;
 }
 
-.btn {
+.form-btn {
   width: 100%;
   margin-top: 1rem;
-  background-color: #393e46;
   color: white;
   border-radius: 0%;
 }
@@ -30,6 +29,12 @@
   height: 100px;
 }
 
+.round-img-big {
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+}
+
 .items {
   border: 1px solid lightgrey;
   padding: 10px;
@@ -37,5 +42,21 @@
 }
 
 .alert {
+  text-align: inherit;
+}
+
+.profile {
+  padding-top: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+}
+
+.left {
   text-align: left;
+  padding: 15px;
+}
+
+.vr1 {
+  border-right: 1px solid black;
 }

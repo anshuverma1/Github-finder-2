@@ -1,5 +1,6 @@
 const initialState = {
   Users: [],
+  User: {},
   loading: false,
 };
 
@@ -9,6 +10,11 @@ const getUsers = (state = initialState, action) => {
       return {
         ...state,
         Users: action.payload,
+      };
+    case "GET_USER":
+      return {
+        ...state,
+        User: action.payload,
       };
     case "LOADING":
       return {

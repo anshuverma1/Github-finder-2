@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Container } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import GitHubIcon from "@material-ui/icons/GitHub";
 
 const Header = () => {
@@ -11,8 +12,12 @@ const Header = () => {
           <GitHubIcon /> Github Finder
         </Navbar.Brand>
         <Nav className="me-right">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#link">About</Nav.Link>
+          <LinkContainer to="/">
+            <Nav.Link>Home</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/about">
+            <Nav.Link>About</Nav.Link>
+          </LinkContainer>
         </Nav>
       </Container>
     </Navbar>

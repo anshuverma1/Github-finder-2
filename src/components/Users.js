@@ -14,9 +14,9 @@ const Users = () => {
         <Row>
           {Users.map((user) => {
             return (
-              <Col sm={4}>
+              <Col key={user.id} sm={4}>
                 {" "}
-                <UserItem key={user.id} user={user} />
+                <UserItem user={user} />
               </Col>
             );
           })}
